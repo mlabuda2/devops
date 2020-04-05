@@ -23,14 +23,11 @@ app.get('/nwd', (req, res) => {
     const number1 = req.query.number1;
     const number2 = req.query.number2;
     let sortedNums = [number1, number2].sort();
-    let nwd = null;
-    console.log(sortedNums.join());
     client.get(sortedNums.join(), (err, nwd_value) => {
         if (nwd_value != null){
-            nwd = nwd_value;
-            res.send(`Cached NWD(${sortedNums.join()}): ${nwd}`);
+            res.send(`Cached NWD(${sortedNums.join()}): ${nwd_value}`);
         } else {
-            nwd = NWD(number1, number2);
+            const nwd = NWD(number1, number2);
             res.send(`NWD(${sortedNums.join()}): ${nwd}`);
             client.set(sortedNums.join(), nwd);
         }

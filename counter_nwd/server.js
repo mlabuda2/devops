@@ -9,27 +9,27 @@ const client = redis.createClient({
 
 client.set('counter', 0);
 
-function NWD(a,b){ return b?NWD(b,a%b):a }
 
 app.get('/', (req, res) => {
     // process.exit(0);
     client.get('counter2', (err, counter_value) => {
-      res.send('Counter: ' + counter_value);
-      client.set('counter', parseInt(counter_value) +1);
+        res.send('Counter: ' + counter_value);
+        client.set('counter', parseInt(counter_value) +1);
     });
 });
 
+function NWD(a,b){ return b?NWD(b,a%b):a }
+
 app.get('/nwd', (req, res) => {
-    const number1 = req.query.number1;
-    const number2 = req.query.number2;
-    let sortedNums = [number1, number2].sort();
-    client.get(sortedNums.join(), (err, nwd_value) => {
+    const sortedNums = [req.query.number1, req.query.number2].sort();
+    const key = sortedNums.join();
+    client.get(key, (err, nwd_value) => {
         if (nwd_value != null){
-            res.send(`Cached NWD(${sortedNums.join()}): ${nwd_value}`);
+            res.send(`Cached NWD(${key}): ${nwd_value}`);
         } else {
-            const nwd = NWD(number1, number2);
-            res.send(`NWD(${sortedNums.join()}): ${nwd}`);
-            client.set(sortedNums.join(), nwd);
+            const nwd = NWD(sortedNums[0], sortedNums[1]);
+            res.send(`NWD(${key}): ${nwd}`);
+            client.set(key, nwd);
         }
     });
 });

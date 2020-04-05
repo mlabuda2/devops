@@ -29,11 +29,12 @@ app.get('/nwd', (req, res) => {
         if (nwd_value != null){
             nwd = nwd_value;
             res.send(`Cached NWD(${sortedNums.join()}): ${nwd}`);
+        } else {
+            nwd = NWD(number1, number2);
+            res.send(`NWD(${sortedNums.join()}): ${nwd}`);
+            client.set(sortedNums.join(), nwd);
         }
     });
-    nwd = NWD(number1, number2);
-    res.send(`NWD(${sortedNums.join()}): ${nwd}`);
-    client.set(sortedNums.join(), nwd);
 });
 
 app.listen(8080, () => {

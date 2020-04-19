@@ -7,3 +7,5 @@ docker run -e PGHOST=my-postgres -e PGUSER=postgres -e PGPASSWORD=123qwe -e PGPO
 
 Usage:
 
+curl "localhost:8080/nwd?number1=100&number2=500"
+curl "localhost:8080/values"

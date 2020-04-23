@@ -5,7 +5,7 @@ services:
 
 
 before_install:
-  - docker build -t mlabuda/reactapp -f ./reactapp/Dockerfile.dev ./reactapp
+  - docker build -t mlabuda/reactapp -f ./reactapp/Dockerfile ./reactapp
 
 
 script:

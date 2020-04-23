@@ -1,0 +1,12 @@
+sudo: required
+
+services:
+  - docker
+
+
+before_install:
+  - docker build -t mlabuda/reactapp -f ./reactapp/Dockerfile.dev ./reactapp
+
+
+script:
+  - docker run -e CI=true mlabuda/reactapp yarn test

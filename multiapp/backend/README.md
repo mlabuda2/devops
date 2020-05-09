@@ -9,3 +9,5 @@ Usage:
 
 curl "localhost:8080/nwd?number1=100&number2=500"
 curl "localhost:8080/values"
+
+TEMAT: KALKULATOR WYNAGRODZEŃ

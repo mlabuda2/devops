@@ -1,3 +1,4 @@
+const keys = require('./keys');
 const express = require("express");
 const redis = require("redis");
 const process = require("process");

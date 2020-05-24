@@ -1,0 +1,17 @@
+Przydatne komendy:
+
+ > docker info                              Display system-wide information
+ > docker ps                                List running containers
+ > docker ps -a                             List all containers
+ > docker system prune                      Remove unused data
+ > docker system prune                      Remove unused data and images
+ > docker exec -it CONTAINER_ID/NAME CMD    Attach to container with CMD (i - interactive(stdin stdout); t - daje nam terminal)
+ > docker start -a CONTAINER_ID/NAME sh     Start and attach container
+ > docker run -p 90:80 nginx                Open and map port 90(local) to 80(nginx)
+ > docker build . -t name:version           Build image with tag
+ > docker build -f Dockerfile.dev           Build image from concrete dockerfile
+ > docker-compose up --build                Build and start containers from current dir (file docker-compose.yml)
+ > docker network create NAME
+ > docker inspect NAME
+
+ docker run -e PGHOST=my-postgres -e PGUSER=postgres -e PGPASSWORD=123qwe -e PGPORT=5432 --network demoapp DockerID

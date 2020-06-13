@@ -20,8 +20,28 @@ spec:
       containers:
        - name: my-backend-container
          image: mlabuda2/backend
-
-  replicas: 3
+         env:
+          - name: PGUSER
+            valueFrom:
+                secretKeyRef:
+                    name: my-app-config
+                    key: PGUSER
+          - name: PGDATABASE
+            valueFrom:
+                secretKeyRef:
+                    name: my-app-config
+                    key: PGDATABASE
+          - name: PGPASSWORD
+            valueFrom:
+                secretKeyRef:
+                    name: postgres-secret
+                    key: PGPASSWORD
+          - name: PGPORT
+            valueFrom:
+                secretKeyRef:
+                    name: my-app-config
+                    key: PGPORT
+replicas: 3
   selector:
     matchLabels:
       app: my-backend

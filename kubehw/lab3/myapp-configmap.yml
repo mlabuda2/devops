@@ -7,5 +7,6 @@ metadata:
 
 data:
     PGUSER: postgres
+    PGDATABASE: postgres
     PGPORT: 5432
     REDISPORT: 6379

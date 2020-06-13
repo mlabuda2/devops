@@ -5,8 +5,17 @@ const client = redis.createClient({
     host: 'my-redis-service',
     port: 6379
 });
+const { Pool } = require('pg');
 const app = express();
 const appId = uuidv4();
+
+const pgClient = new Pool({
+    user: keys.pgUser,
+    host: 'my-postgres-service',
+    database: keys.pgDatabase,
+    password: keys.pgPassword,
+    port: keys.pgPort
+});
 
 app.get('/', (req, res) => {
     res.send(`${appId} Hello`)
@@ -23,6 +32,9 @@ app.get('/nwd', (req, res) => {
             res.send(`Cached NWD(${key}): ${nwd_value}`);
         } else {
             const nwd = NWD(sortedNums[0], sortedNums[1]);
+            pgClient
+                .query(`INSERT INTO values (number) VALUES (${nwd})`)
+                .catch(err => console.log(err));
             res.send(`NWD(${key}): ${nwd}`);
             client.set(key, nwd);
         }

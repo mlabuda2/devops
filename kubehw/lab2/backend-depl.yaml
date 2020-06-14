@@ -23,12 +23,12 @@ spec:
          env:
           - name: PGUSER
             valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                     name: my-app-config
                     key: PGUSER
           - name: PGDATABASE
             valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                     name: my-app-config
                     key: PGDATABASE
           - name: PGPASSWORD
@@ -38,11 +38,11 @@ spec:
                     key: PGPASSWORD
           - name: PGPORT
             valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                     name: my-app-config
                     key: PGPORT
-replicas: 3
+  replicas: 3
   selector:
-    matchLabels:
-      app: my-backend
-      type: backend
+      matchLabels:
+          app: my-backend
+          type: backend

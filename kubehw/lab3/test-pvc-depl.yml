@@ -10,7 +10,7 @@ spec:
         - image: alpine
           name: alpine
           command: ["/bin/sh", "-c"]
-          args: ["sleep 30000"]
+          args: ["sleep 10"]
 
           volumeMounts:
             - mountPath: /opt

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: my-frontend-depl
+  labels:
+    app: my-frontend
+    type: frontend
+
+spec:
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: my-frontend
+        type: frontend
+
+    spec:
+      containers:
+       - name: my-frontend-container
+         image: mlabuda2/frontend
+  replicas: 3
+  selector:
+      matchLabels:
+          app: my-frontend
+          type: frontend
